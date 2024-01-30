@@ -94,3 +94,31 @@ li {
 input[type='checkbox'] {
   margin-left: 20px;
 }
+
+input.edit-input {
+  background-color: transparent;
+  margin-top: 0px;
+  width: 90px;
+  margin-left: 0px;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 0px;
+}
+
+.edit-button {
+  background-color: rgb(94, 218, 162);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 90px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.edit-button:hover {
+  background-color: rgb(57, 204, 138);
+  cursor: pointer;
+}

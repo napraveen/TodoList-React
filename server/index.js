@@ -55,6 +55,30 @@ app.delete('/api/removetodo/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+app.post('/api/edittodo', async (req, res) => {
+  const { id, inputVal } = req.body; // Corrected variable names
+
+  try {
+    // Find the todo by ID and update the 'todos' field
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id, // Corrected variable name
+      { todos: inputVal },
+      { new: true } // Return the updated document
+    );
+    updatedTodo.save();
+    if (!updatedTodo) {
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+    const todos = await Todo.find();
+
+    // Send the updated todo as the response
+    res.json({ todos: todos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(4000, () => {
   console.log('Server running on 4001');
 });

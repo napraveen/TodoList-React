@@ -7,7 +7,6 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [editId, setId] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [edittedValue, setEdittedValue] = useState('');
   const handleAddTodo = async () => {
     try {
       const response = await fetch('http://localhost:4000/api/addone', {
@@ -19,7 +18,7 @@ const Home = () => {
       });
       const data = await response.json();
       setTodos(data.todos);
-      setInputValue('');
+      setInputValue(''); // Reset the input value after adding a todo
     } catch (error) {
       console.error(error);
     }
@@ -50,17 +49,18 @@ const Home = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: id, inputVal: edittedValue }),
+        body: JSON.stringify({ id: id, inputVal: inputValue }),
       });
       const data = await response.json();
       console.log('hoo ', data);
       setTodos(data.todos);
-      setEdittedValue('');
-      setId(null);
+      setInputValue(''); // Reset the input value after editing
     } catch (error) {
       console.error(error);
     }
   };
+
+  // handleDoneTodo
   useEffect(() => {
     async function showAll() {
       try {
@@ -98,8 +98,8 @@ const Home = () => {
                   <>
                     <input
                       type="text"
-                      value={edittedValue}
-                      onChange={(e) => setEdittedValue(e.target.value)}
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
                       className="edit-input"
                     />
 
