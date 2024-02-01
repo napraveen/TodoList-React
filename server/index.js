@@ -17,10 +17,6 @@ mongoose
   .then(() => console.log('MongoDB is  connected successfully'))
   .catch((err) => console.error(err));
 
-// app.get('/', async (req, res) => {
-//   res.send({ message: 'This is home page' });
-// });
-
 app.post('/api/addone', async (req, res) => {
   try {
     const newTodo = req.body.todos;
@@ -56,22 +52,19 @@ app.delete('/api/removetodo/:id', async (req, res) => {
   }
 });
 app.post('/api/edittodo', async (req, res) => {
-  const { id, inputVal } = req.body; // Corrected variable names
+  const { id, inputVal } = req.body;
 
   try {
-    // Find the todo by ID and update the 'todos' field
     const updatedTodo = await Todo.findByIdAndUpdate(
-      id, // Corrected variable name
+      id,
       { todos: inputVal },
-      { new: true } // Return the updated document
+      { new: true }
     );
     updatedTodo.save();
     if (!updatedTodo) {
       return res.status(404).json({ error: 'Todo not found' });
     }
     const todos = await Todo.find();
-
-    // Send the updated todo as the response
     res.json({ todos: todos });
   } catch (error) {
     console.error(error);

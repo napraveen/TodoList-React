@@ -122,13 +122,6 @@ const Home = () => {
                     </button>
                   </>
                 )}
-
-                {/* <button
-                  onClick={() => handleDoneTodo(todo._id)}
-                  className="remove-button"
-                >
-                  Done
-                </button> */}
               </li>
             ))}
           </ul>
